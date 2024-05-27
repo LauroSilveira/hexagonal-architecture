@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+client:
+  addresses:
+    url: http://localhost:8082/addresses
+
+spring:
+  data:
+    # configurations to work with username and password
+    mongodb:
+      host: localhost
+      port: 27017  # default port
+      authentication-database: admin
+      username: root
+      password: example
+      database: hexagonal
