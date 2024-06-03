@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: hexagonal-architecture-service
+  license:
+    name: MIT
+paths:
+  /customer:
+    get:
+      operationId: getConsumers
+      summary: List of Customers
+      responses:
+        '200':
+          $ref: "#/components/responses/Customers"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - customer
+    post:
+      summary: Insert a new Customer
+      description: Insert a new Customer
+      operationId: insert
+      tags:
+        - customer
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerRequest'
+      responses:
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update the information of a specific Customer
+      description: Update the information of a specific Customer
+      operationId: update
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+          description: Identifier of Customer
+          example: 'xmllkas9ia'
+      tags:
+        - customer
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerRequest'
+      responses:
+        200:
+          description: Updated
+        400:
+          $ref: '#/components/responses/BadRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a specific Customer
+      description: Delete a Customer
+      operationId: delete
+      parameters:
+        - in: path
+          name: customerId
+          schema:
+            type: string
+          required: true
+          description: Identifier of Customer
+      tags:
+        - customer
+      responses:
+        202:
+          description: Accepted
+        400:
+          $ref: '#/components/responses/BadRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+
+  /customer/{id}:
+    get:
+      summary: Info for a specific Customer
+      operationId: getConsumerById
+      tags:
+        - customer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the customer to retrieve
+          example: 'axds123'
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: "#/components/responses/Customer"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  responses:
+    Customer:
+      description: Information about a specific Customer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Customer'
+    Customers:
+      description: List with Customers information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Customers'
+    NotFound:
+      description: The specific resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description:  The request cannot be performed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InternalServerError:
+      description: Internal Server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  requestBodies:
+    CustomerRequest:
+      description: A Customer information to insert
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Customer'
+
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1239800'
+        name:
+          type: string
+          example: Alfred
+        dni:
+          type: string
+          example: '05734132X'
+        zipCode:
+          type: string
+          example: 28050
+      required:
+        - name
+        - dni
+        - zipCode
+    Customers:
+      type: array
+      maxItems: 100
+      items:
+        $ref: "#/components/schemas/Customer"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
