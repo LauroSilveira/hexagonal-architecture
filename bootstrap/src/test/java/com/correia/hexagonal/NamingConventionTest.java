@@ -12,12 +12,12 @@ public class NamingConventionTest {
 
 
     @ArchTest
-    public static final ArchRule controllers_reside_only_controller_package = classes()
+    public static final ArchRule delegates_reside_only_delegates_package = classes()
             .that()
-            .haveNameMatching(".*Controller")
+            .haveNameMatching(".*Delegate")
             .should()
-            .resideInAPackage("..adapters.in.rest.controller")
-            .as("Controller's classes must reside in package adapters.in.rest.controller");
+            .resideInAnyPackage("..adapters.in.rest.delegates", "..hexagonal.adapters.api")
+            .as("Controller's classes must reside in package adapters.in.rest.delegates");
 
     @ArchTest
     public static final ArchRule consumer_reside_only_consumer_package = classes()
@@ -58,7 +58,7 @@ public class NamingConventionTest {
             .that()
             .haveNameMatching(".*Mapper")
             .should()
-            .resideInAnyPackage("..adapters.in.kafka.consumer.mapper", "..adapters.in.rest.controller.mapper",
+            .resideInAnyPackage("..adapters.in.kafka.consumer.mapper", "..adapters.in.rest.delegates.mapper",
                     "..adapters.out.feign.client.mapper", "..adapters.out.repository.mapper")
             .as("Mappers classes must reside in package mappers");
 }
