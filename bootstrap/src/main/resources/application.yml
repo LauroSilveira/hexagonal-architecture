@@ -24,3 +24,13 @@ spring:
 openapi:
   hexagonalArchitectureService:
     base-path: /api
+
+# Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      findZipCode:
+        sliding-window-size: 2
+        minimum-number-of-calls: 2
+        wait-duration-in-open-state:
+          seconds:  50s

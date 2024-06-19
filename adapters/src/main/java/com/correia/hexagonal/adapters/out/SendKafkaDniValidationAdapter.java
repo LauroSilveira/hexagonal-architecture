@@ -6,13 +6,12 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 //Adapter (implementation) of SendDniValidationPort
-
 @Component
-public class SendDniValidationAdapter implements SendDniValidationPort {
+public class SendKafkaDniValidationAdapter implements SendDniValidationPort {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public SendDniValidationAdapter(KafkaTemplate<String, String> kafkaTemplate) {
+    public SendKafkaDniValidationAdapter(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

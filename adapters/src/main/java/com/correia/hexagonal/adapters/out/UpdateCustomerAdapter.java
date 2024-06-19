@@ -8,7 +8,6 @@ import com.correia.hexagonal.domain.customer.Customer;
 import org.springframework.stereotype.Component;
 
 //Adapter (implementation) of UpdateCustomerPort
-
 @Component
 public class UpdateCustomerAdapter implements UpdateCustomerPort {
 
