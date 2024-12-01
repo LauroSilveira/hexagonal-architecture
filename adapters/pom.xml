@@ -51,6 +51,10 @@
             <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -92,6 +96,11 @@
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <delegatePattern>true</delegatePattern>
                                 <java8>true</java8>
+                                <additionalModelTypeAnnotations>
+                                    @lombok.Data;
+                                    @lombok.NoArgsConstructor;
+                                    @lombok.AllArgsConstructor;
+                                </additionalModelTypeAnnotations>
                             </configOptions>
                         </configuration>
                     </execution>

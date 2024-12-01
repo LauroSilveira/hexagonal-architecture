@@ -2,8 +2,9 @@ openapi: 3.0.3
 info:
   version: 1.0.0
   title: hexagonal-architecture-service
-  license:
-    name: MIT
+  description: A Hexagonal Architecture service
+servers:
+  - url: '/'
 paths:
   /customer:
     get:
@@ -35,49 +36,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    put:
-      summary: Update the information of a specific Customer
-      description: Update the information of a specific Customer
-      operationId: update
-      parameters:
-        - in: path
-          name: customerId
-          required: true
-          schema:
-            type: string
-          description: Identifier of Customer
-          example: 'xmllkas9ia'
-      tags:
-        - customer
-      requestBody:
-        $ref: '#/components/requestBodies/CustomerRequest'
-      responses:
-        200:
-          description: Updated
-        400:
-          $ref: '#/components/responses/BadRequest'
-        500:
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      summary: Delete a specific Customer
-      description: Delete a Customer
-      operationId: delete
-      parameters:
-        - in: path
-          name: customerId
-          schema:
-            type: string
-          required: true
-          description: Identifier of Customer
-      tags:
-        - customer
-      responses:
-        202:
-          description: Accepted
-        400:
-          $ref: '#/components/responses/BadRequest'
-        500:
-          $ref: '#/components/responses/InternalServerError'
 
   /customer/{id}:
     get:
@@ -101,6 +59,49 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a specific Customer
+      description: Delete a Customer
+      operationId: delete
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Identifier of Customer
+      tags:
+        - customer
+      responses:
+        202:
+          description: Accepted
+        400:
+          $ref: '#/components/responses/BadRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update the information of a specific Customer
+      description: Update the information of a specific Customer
+      operationId: update
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Identifier of Customer
+          example: 'xmllkas9ia'
+      tags:
+        - customer
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerRequest'
+      responses:
+        200:
+          description: Updated
+        400:
+          $ref: '#/components/responses/BadRequest'
+        500:
           $ref: '#/components/responses/InternalServerError'
 
 components:
