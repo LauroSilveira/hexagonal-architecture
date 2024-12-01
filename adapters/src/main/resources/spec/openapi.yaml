@@ -2,8 +2,9 @@ openapi: 3.0.3
 info:
   version: 1.0.0
   title: hexagonal-architecture-service
-  license:
-    name: MIT
+  description: A Hexagonal Architecture service
+servers:
+  - url: '/'
 paths:
   /customer:
     get:

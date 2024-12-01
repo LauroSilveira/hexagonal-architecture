@@ -21,9 +21,9 @@ spring:
       password: example
       database: hexagonal
 
-openapi:
-  hexagonalArchitectureService:
-    base-path: /api
+#openapi:
+#  hexagonalArchitectureService:
+#    base-path: /api
 
 # Circuit Breaker
 resilience4j:

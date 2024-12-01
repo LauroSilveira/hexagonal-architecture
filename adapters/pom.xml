@@ -96,6 +96,11 @@
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <delegatePattern>true</delegatePattern>
                                 <java8>true</java8>
+                                <additionalModelTypeAnnotations>
+                                    @lombok.Data;
+                                    @lombok.NoArgsConstructor;
+                                    @lombok.AllArgsConstructor;
+                                </additionalModelTypeAnnotations>
                             </configOptions>
                         </configuration>
                     </execution>
