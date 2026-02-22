@@ -8,20 +8,17 @@ import com.correia.hexagonal.domain.address.Address;
 import com.correia.hexagonal.domain.exception.FeignClientException;
 import feign.FeignException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 //Adapter (implementation) of FindAddressByZipCodePort
 @Component
+@RequiredArgsConstructor
 public class FindAddressByZipCodeAdapter implements FindAddressByZipCodePort {
 
     private final FindAddressFeignClient findAddressFeignClient;
     private final AddressResponseMapper addressResponseMapper;
 
-    public FindAddressByZipCodeAdapter(FindAddressFeignClient findAddressFeignClient,
-                                       AddressResponseMapper addressResponseMapper) {
-        this.findAddressFeignClient = findAddressFeignClient;
-        this.addressResponseMapper = addressResponseMapper;
-    }
 
     @CircuitBreaker(name = "findZipCode", fallbackMethod = "zipCodeFallBack")
     @Override

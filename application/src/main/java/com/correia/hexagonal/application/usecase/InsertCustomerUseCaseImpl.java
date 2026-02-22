@@ -6,22 +6,16 @@ import com.correia.hexagonal.application.out.SendDniValidationPort;
 import com.correia.hexagonal.application.out.FindAddressByZipCodePort;
 import com.correia.hexagonal.application.out.InsertCustomerPort;
 import com.correia.hexagonal.domain.customer.Customer;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class InsertCustomerUseCaseImpl implements InsertCustomerUseCase {
 
     private final FindAddressByZipCodePort findAddressByZipCodePort;
     private final InsertCustomerPort insertCustomerPortOutPort;
     private final SendDniValidationPort sendDniValidationPort;
-
-    public InsertCustomerUseCaseImpl(final FindAddressByZipCodePort findAddressByZipCodePort,
-                                     final InsertCustomerPort insertCustomerPortOutPort,
-                                     final SendDniValidationPort sendDniValidationPort) {
-        this.findAddressByZipCodePort = findAddressByZipCodePort;
-        this.insertCustomerPortOutPort = insertCustomerPortOutPort;
-        this.sendDniValidationPort = sendDniValidationPort;
-    }
 
     @Override
     public Customer insert(final Customer customer, final String zipCode) {
