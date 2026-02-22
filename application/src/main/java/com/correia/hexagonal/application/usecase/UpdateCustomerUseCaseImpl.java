@@ -6,22 +6,16 @@ import com.correia.hexagonal.application.out.FindAddressByZipCodePort;
 import com.correia.hexagonal.application.out.FindCustomerByIdPort;
 import com.correia.hexagonal.application.out.UpdateCustomerPort;
 import com.correia.hexagonal.domain.customer.Customer;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class UpdateCustomerUseCaseImpl implements UpdateCustomerUseCase {
 
     private final FindCustomerByIdPort findCustomerByIdPort;
     private final FindAddressByZipCodePort findAddressByZipCodePort;
     private final UpdateCustomerPort updateCustomerPort;
-
-    public UpdateCustomerUseCaseImpl(final FindCustomerByIdPort findCustomerByIdPort,
-                                     final FindAddressByZipCodePort findAddressByZipCodePort,
-                                     final UpdateCustomerPort updateCustomerPort) {
-        this.findCustomerByIdPort = findCustomerByIdPort;
-        this.findAddressByZipCodePort = findAddressByZipCodePort;
-        this.updateCustomerPort = updateCustomerPort;
-    }
 
     @Override
     public Customer updateCustomer(final String id, final Customer customer, final String zipCode) {

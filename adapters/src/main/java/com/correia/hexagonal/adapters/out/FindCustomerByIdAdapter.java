@@ -6,20 +6,18 @@ import com.correia.hexagonal.adapters.out.repository.mapper.CustomerEntityMapper
 import com.correia.hexagonal.application.out.FindCustomerByIdPort;
 import com.correia.hexagonal.domain.customer.Customer;
 import com.correia.hexagonal.domain.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 //Adapter (implementation) of FindCustomerByIdPort
 @Component
+@RequiredArgsConstructor
 public class FindCustomerByIdAdapter implements FindCustomerByIdPort {
 
     private final CustomerRepository customerRepository;
     private final CustomerEntityMapper customerEntityMapper;
 
-    public FindCustomerByIdAdapter(CustomerRepository customerRepository, CustomerEntityMapper customerEntityMapper) {
-        this.customerRepository = customerRepository;
-        this.customerEntityMapper = customerEntityMapper;
-    }
 
     @Override
     public Customer findById(final String id) {
